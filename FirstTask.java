@@ -62,6 +62,8 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
             return  null;
         }
 
+        hashspace[hashedKey] = null;
+
     }
 
     //returns true if the dictionary is empty
