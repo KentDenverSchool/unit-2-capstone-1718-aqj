@@ -24,7 +24,8 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
     //remove a key-value pair and return its value
     Value remove(Key key) {
-
+int hashedKey = hashKey(key);
+        a[hashedKey] = new ArrayList<Value>();
         size--;
     }
 
