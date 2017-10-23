@@ -7,11 +7,13 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     private int m;
 
     public FirstTask(){
+
         m = 2147483647;
         a = new ArrayList[m];
     }
 
     //add an key-value pair to the dictionary
+
     void put(Key key, Value value){
         int Hashedkey = hashKey(key);
         a[Hashedkey].add(value);
@@ -19,21 +21,33 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     }
     //get the value associated with a given key
     Value get(Key key){
-
         int hashKey = hashKey(key);
         return a[hashKey].get(0);
     }
 
     //remove a key-value pair and return its value
-    Value remove(Key key){
-
+    Value remove(Key key) {
+int hashedKey = hashKey(key);
+        a[hashedKey] = new ArrayList<Value>();
+        size--;
     }
 
     //returns true if the dictionary is empty
-    boolean isEmpty(){
-
+    boolean isEmpty() {
+        if (size() == 0) {
+            return true;
+        } else return false;
     }
 
+    int hashKey(Key key) {
+        String stringKey = key.toString();
+    int hashedStringKey = stringKey.hashCode();
+
+        return (hashedStringKey % m);
+    }
+    //returns the number of key-value pairs in the dictionary
+    int size() {
+        return size;
 
 
     int hashKey(Key key){
@@ -42,8 +56,6 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
         int hashedStringKey = stringKey.hashCode();
 
         return (hashedStringKey % m);
-
     }
-    //returns the number of key-value pairs in the dictionary
-    int size(){ }
+    
 }
