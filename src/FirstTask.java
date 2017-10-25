@@ -14,10 +14,34 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
     //add an key-value pair to the dictionary
 
-    void put(Key key, Value value) {
+
+    void put(Key key, Value value){
+        ArrayList<ArrayList> b = new ArrayList<>();
+        ArrayList val = new ArrayList();
+        boolean toF = false;
+
         int Hashedkey = hashKey(key);
-        a[Hashedkey].add(value);
-        size++;
+        if (a[Hashedkey]== null){
+            a[Hashedkey] = b;
+        }
+        for (int i = 0; i <a[Hashedkey].size() ; i++) {
+            if (((Comparable) a[Hashedkey].get(i).get(0)).compareTo(key) == 0){
+                a[Hashedkey].remove(i);
+                val.add(key);
+                val.add(value);
+                a[Hashedkey].add(val);
+                size++;
+                toF= true;
+                break;
+            }
+        }
+        if(!toF)
+        {
+            val.add(key);
+            val.add(value);
+            a[Hashedkey].add(val);
+            size++;
+        }
     }
 
     //get the value associated with a given key
