@@ -99,7 +99,12 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
                 Key newKey = (Key) a[i].get(j).get(0);
                 Value newValue = (Value) a[i].get(j).get(0);
                int index = hashKey(newKey);
-                aCopy[index].add()
+                if (aCopy[index] == null){
+                    aCopy[index] = new ArrayList<>();
+                }
+                ArrayList tempArray = new ArrayList();
+                tempArray.add(newKey,newValue);
+                aCopy[index].
             }
 
         }
