@@ -6,7 +6,7 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     private int size;
     private int m;
 
-    public FirstTask(){
+    public FirstTask() {
 
         m = 2147483647;
         a = new ArrayList[m];
@@ -14,10 +14,12 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
     //add an key-value pair to the dictionary
 
+
     void put(Key key, Value value){
         ArrayList<ArrayList> b = new ArrayList<>();
         ArrayList val = new ArrayList();
         boolean toF = false;
+
         int Hashedkey = hashKey(key);
         if (a[Hashedkey]== null){
             a[Hashedkey] = b;
@@ -43,16 +45,23 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     }
 
     //get the value associated with a given key
-    Value get(Key key){
+    Value get(Key key) {
         int hashKey = hashKey(key);
         return a[hashKey].get(0);
     }
 
     //remove a key-value pair and return its value
     Value remove(Key key) {
-int hashedKey = hashKey(key);
-        a[hashedKey] = new ArrayList<Value>();
+        int hashedKey = hashKey(key);
+        Value v = null;
+        for(int i = 0; i < a[hashedKey].size(); i ++){
+            if (a[hashedKey].get(i).get(0).equals(key) ){
+                v = (Value)a[hashedKey].get(i).get(1);
+                a[hashedKey].get(i).remove(0);
+            }
+        }
         size--;
+        return v;
     }
 
     //returns true if the dictionary is empty
@@ -69,12 +78,32 @@ int hashedKey = hashKey(key);
     }
 
 
-    int hashKey(Key key){
+    int hashKey(Key key) {
 
         String stringKey = key.toString();
         int hashedStringKey = stringKey.hashCode();
 
         return (hashedStringKey % m);
     }
-    
+
+    // TASK 2: THE SECOND COMING OF CHRIST
+// goes through every key and value IN ALL EXISTENCE and .hash's every key. Moves K,V pair to new place
+    public void resize(int newM){
+        m = newM;
+        ArrayList<ArrayList>[] aCopy = new ArrayList[m];
+//
+
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].size(); j++){
+                Key newKey = (Key) a[i].get(j).get(0);
+                Value newValue = (Value) a[i].get(j).get(0);
+               int index = hashKey(newKey);
+                aCopy[index].add()
+            }
+
+        }
+    }
+
 }
+
