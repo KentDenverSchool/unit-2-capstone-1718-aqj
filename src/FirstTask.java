@@ -45,9 +45,25 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     }
 
     //get the value associated with a given key
-    Value get(Key key) {
-        int hashKey = hashKey(key);
-        return a[hashKey].get(0);
+     public String get(Key key) {
+
+        String returnValue = "";
+        int numOfValues = 0;
+        int hashedKey = hashKey(key);
+
+
+        for (ArrayList curr : hashspace[hashedKey]) {
+
+            if (numOfValues == 0) {
+                returnValue = curr.get(1).toString();
+                numOfValues++;
+            }
+            else {
+                returnValue = returnValue + ", " + curr.get(1).toString();
+            }
+
+        }
+        return returnValue;
     }
 
     //remove a key-value pair and return its value
