@@ -2,7 +2,7 @@ import java.*;
 import java.util.ArrayList;
 
 public class FirstTask<Key extends Comparable<Key>, Value> {
-    private ArrayList<Value>[] a;
+    private ArrayList<ArrayList>[] a;
     private int size;
     private int m;
 
@@ -29,8 +29,15 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     //remove a key-value pair and return its value
     Value remove(Key key) {
         int hashedKey = hashKey(key);
-        a[hashedKey] = new ArrayList<Value>();
+        Value v = null;
+        for(int i = 0; i < a[hashedKey].size(); i ++){
+            if (a[hashedKey].get(i).get(0).equals(key) ){
+                v = (Value)a[hashedKey].get(i).get(1);
+                a[hashedKey].get(i).remove(0);
+            }
+        }
         size--;
+        return v;
     }
 
     //returns true if the dictionary is empty
@@ -56,13 +63,20 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     }
 
     // TASK 2: THE SECOND COMING OF CHRIST
-    
+// goes through every key and value IN ALL EXISTENCE and .hash's every key. Moves K,V pair to new place
     public void resize(int newM){
         m = newM;
-        ArrayList<Value>[] aCopy = new ArrayList[m];
+        ArrayList<ArrayList>[] aCopy = new ArrayList[m];
+//
+
 
         for (int i = 0; i < a.length; i++) {
-            int newI =
+            for (int j = 0; j < a[i].size(); j++){
+                Key newKey = (Key) a[i].get(j).get(0);
+                Value newValue = (Value) a[i].get(j).get(0);
+               int index = hashKey(newKey);
+                aCopy[index].add()
+            }
 
         }
     }
