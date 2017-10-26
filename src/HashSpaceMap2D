@@ -41,7 +41,7 @@ public class HashSpaceMap2D<Key extends Comparable<Key>, Value> {
 
 
 
-        if((1.0*this.size())/m >= 80){
+        if((1.0*this.size())/m >= .8){
             this.resize(m*2);
         }
 
