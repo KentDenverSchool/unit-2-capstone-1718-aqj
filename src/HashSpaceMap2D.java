@@ -165,7 +165,7 @@ public class HashSpaceMap2D<Key extends Comparable<Key>, Value> {
             }
 
         }
-        System.out.println(m);
+        System.out.println(m);// checks if resize activates
         size = newSize;
         hashspace = newHashspace;
 
