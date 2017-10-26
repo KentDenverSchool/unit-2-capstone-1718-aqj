@@ -16,6 +16,9 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
 
     void put(Key key, Value value){
+        if ((double)size()/m >= .8){
+            resize(m * 2);
+        }
         ArrayList<ArrayList> b = new ArrayList<>();
         ArrayList val = new ArrayList();
         boolean toF = false;
