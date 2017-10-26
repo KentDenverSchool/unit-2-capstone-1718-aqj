@@ -1,4 +1,5 @@
 import java.*;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class FirstTask<Key extends Comparable<Key>, Value> {
@@ -7,8 +8,7 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     private int m;
 
     public FirstTask() {
-
-        m = 2147483647;
+        m = 10;
         a = new ArrayList[m];
     }
 
@@ -16,9 +16,11 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
 
     void put(Key key, Value value){
+        // task 4
         if ((double)size()/m >= .8){
             resize(m * 2);
         }
+        // end task 4
         ArrayList<ArrayList> b = new ArrayList<>();
         ArrayList val = new ArrayList();
         boolean toF = false;
@@ -33,7 +35,6 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
                 val.add(key);
                 val.add(value);
                 a[Hashedkey].add(val);
-                size++;
                 toF= true;
                 break;
             }
@@ -50,19 +51,14 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     //get the value associated with a given key
      public String get(Key key) {
 
-        String returnValue = "";
+        String returnValue = null;
         int numOfValues = 0;
         int hashedKey = hashKey(key);
 
 
         for (ArrayList curr : a[hashedKey]) {
-
-            if (numOfValues == 0) {
+            if (curr.get(0).equals(key)){
                 returnValue = curr.get(1).toString();
-                numOfValues++;
-            }
-            else {
-                returnValue = returnValue + ", " + curr.get(1).toString();
             }
 
         }
@@ -73,7 +69,11 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
     Value remove(Key key) {
         int hashedKey = hashKey(key);
         Value v = null;
+
         for(int i = 0; i < a[hashedKey].size(); i ++){
+            if (key != a[hashedKey].get(i).get(0)){
+                return null;
+            }
             if (a[hashedKey].get(i).get(0).equals(key) ){
                 v = (Value)a[hashedKey].get(i).get(1);
                 a[hashedKey].get(i).remove(0);
@@ -114,20 +114,60 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
 
         for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a[i].size(); j++){
-                // Key newKey = (Key) a[i].get(j).get(0);
-                int newHash =  hashKey((Key) a[i].get(j).get(0));
-                ArrayList shell = a[i].get(j);
-                // Value newValue = (Value) a[i].get(j).get(1);
-                // int index = hashKey(newKey);
-                if (aCopy[newHash] == null){
-                    aCopy[newHash] = new ArrayList<>();
+            if(a[i] != null) {
+                for (int j = 0; j < a[i].size(); j++) {
+                    // Key newKey = (Key) a[i].get(j).get(0);
+                    int newHash = hashKey((Key) a[i].get(j).get(0));
+                    ArrayList shell = a[i].get(j);
+                    // Value newValue = (Value) a[i].get(j).get(1);
+                    // int index = hashKey(newKey);
+                    if (aCopy[newHash] == null) {
+                        aCopy[newHash] = new ArrayList<>();
+                    }
+                    aCopy[newHash].add(shell);
                 }
-                aCopy[newHash].add(shell);
             }
         }
         a = aCopy;
+
     }
 
+    public static void main(String[] args) {
+        FirstTask<String, String> a = new FirstTask<>();
+        System.out.println("Empty: " + a.isEmpty());
+        a.put("key1" , "hey");
+        a.put("key2" , "there");
+        a.put("key3" , "Delila");
+        System.out.println("Empty: " + a.isEmpty());
+        System.out.println("Size: (should be 3)" + a.size());
+        a.put("key4" , "Whats it like in New York City");
+        a.put("key5" , "But girl tonight you look so pretty");
+        a.put("key6" , "Yes you do");
+        a.put("key7" , "Time Square cant shine as bright as you");
+        a.put("key8" , "oh yes its true");
+        System.out.println("Size: (should be 8)" + a.size());
+        a.put("key1", "hi");
+        System.out.println(a.get("key1"));
+        System.out.println(a.get("key2"));
+        System.out.println(a.get("key3"));
+        System.out.println(a.get("key4"));
+        System.out.println(a.get("key5"));
+        System.out.println(a.get("key6"));
+        System.out.println(a.get("key7"));
+        System.out.println(a.get("key8"));
+        a.remove("key4");
+        System.out.println(a.get("key1"));
+        System.out.println(a.get("key2"));
+        System.out.println(a.get("key3"));
+        System.out.println(a.get("key4"));
+        System.out.println(a.get("key5"));
+        System.out.println(a.get("key6"));
+        System.out.println(a.get("key7"));
+        System.out.println(a.get("key8"));
+// testing resize 
+        System.out.println(a.m);
+
+    }
 }
+
 
