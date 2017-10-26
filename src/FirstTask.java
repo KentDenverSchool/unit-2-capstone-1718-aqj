@@ -112,18 +112,18 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
 
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].size(); j++){
-                Key newKey = (Key) a[i].get(j).get(0);
-                Value newValue = (Value) a[i].get(j).get(0);
-               int index = hashKey(newKey);
-                if (aCopy[index] == null){
-                    aCopy[index] = new ArrayList<>();
+                // Key newKey = (Key) a[i].get(j).get(0);
+                int newHash =  hashKey((Key) a[i].get(j).get(0));
+                ArrayList shell = a[i].get(j);
+                // Value newValue = (Value) a[i].get(j).get(1);
+                // int index = hashKey(newKey);
+                if (aCopy[newHash] == null){
+                    aCopy[newHash] = new ArrayList<>();
                 }
-                ArrayList tempArray = new ArrayList();
-                tempArray.add(newKey,newValue);
-                aCopy[index].
+                aCopy[newHash].add(shell);
             }
-
         }
+        a = aCopy;
     }
 
 }
