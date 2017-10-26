@@ -52,7 +52,7 @@ public class FirstTask<Key extends Comparable<Key>, Value> {
         int hashedKey = hashKey(key);
 
 
-        for (ArrayList curr : hashspace[hashedKey]) {
+        for (ArrayList curr : a[hashedKey]) {
 
             if (numOfValues == 0) {
                 returnValue = curr.get(1).toString();
